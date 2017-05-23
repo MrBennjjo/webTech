@@ -1,0 +1,33 @@
+body, html {
+    height: 100%;
+    
+}
+
+.stuff {
+    display: block;
+    text-align: center;
+}
+
+.form-box {
+  opacity: 50%;
+  display: inline-block;
+  text-align: left;
+  max-width: 330px;
+  padding: 15px;
+  margin: 20%;
+  
+  background-color: rgba(0, 1, 0, 0.8);
+  border: 2px solid #f4bc42;
+}
+
+.form-box .form-control {
+  margin-bottom: 10px;
+}
+
+.bg {
+    background-image: url("background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}

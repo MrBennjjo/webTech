@@ -2,18 +2,20 @@
 
 body, html {
     height: 100%;
+    margin: 0;
 }
 
 .bg {
+	position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%;
 }
 
 /* Homepage styles */
 .bg-homepage {
     background-image: url("bg-homepage.jpg");
+	height: 100%;
 }
 
 .form-box {

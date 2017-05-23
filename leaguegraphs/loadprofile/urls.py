@@ -2,8 +2,10 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'loadprofile'
 urlpatterns = [
     url(r'^$', views.base, name='base'),
     url(r'^home$', views.home, name='home'),
-    #url(r'^$', views.profile, name='profile'),
+	url(r'^form$', views.form, name='form'),
+    url(r'^profile$', views.profile, name='profile'),
 ]

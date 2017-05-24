@@ -20,21 +20,13 @@ class Summoner(models.Model):
 class MatchSummary(models.Model):
 	match_id = models.BigIntegerField()
 	win_loss = models.BooleanField()
-	end_golddifference = models.IntegerField()
-	biggest_deficit = models.IntegerField(default=0)
-	biggest_advantage = models.IntegerField(default=0)
-	
-	def __str__(self):
-		return '%d' % (self.match_id)	
-
-#join table between summoner and match
-class SummonerMatch(models.Model):
-	match = models.ForeignKey(MatchSummary, on_delete=models.CASCADE)
+	cs_average10 = models.FloatField()
+	gpm_average10 = models.FloatField()
+	xpm_average10 = models.FloatField()
 	summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
-	participant_id = models.IntegerField()
+		
+	def __str__(self):
+		return '%s, %d' % (self.summoner, self.match_id)	
+
+
 	
-	def __str__(self): 
-		return 'Match: %d, Summoner %d, Team %d' % (self.match, self.summoner, self.team_id)
-	
-class ProfileQueries(models.Model): 
-	summoner = models.ForeignKey(account_id, 

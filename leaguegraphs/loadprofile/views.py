@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
-from loadprofile.util import findSummoner
-
+from loadprofile.util import findSummoner, ApiException
 # Create your views here.
 
 def base(request):
@@ -14,10 +13,12 @@ def home(request):
 
 def form(request):
     postName = request.POST['summonerName']
-    if findSummoner(postName) == True:
-        return HttpResponseRedirect(reverse('loadprofile:profile'))
-    else:
+    
+    try:
+        accountId = findSummoner(postName)
+        return HttpResponseRedirect(reverse('loadprofile:profile', args = [accountId]))
+    except ApiException:
         return render(request, 'loadprofile/home.html', {'error_message': "You didn't select a choice.",})
 
-def profile(request):
-    return render(request, 'loadprofile/profile.html')
+def profile(request, accountId):
+    return render(request, 'loadprofile/profile.html', {'accountId': accountId,})

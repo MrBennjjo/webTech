@@ -7,18 +7,32 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Profile Page</title>
     
-    <!-- Bootstrap -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="homepage.css" rel="stylesheet">
+    <!-- Load Bootstrap and our own css files -->
+    {% load static %}
+    <link rel="stylesheet" type='text/css' href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}">
     </head>
     <body> 
         <div class="bg bg-profile">
-            <h1>Welcome to your user profile friend :)</h1>
+            <div class="profile-container">
+                <img src="http://ddragon.leagueoflegends.com/cdn/7.10.1/img/profileicon/1601.png">
+                <h1 class="profile-name">Gurglesprain</h1>
+                <h3>LVL 30</h3>
+                <button type="button">Renew Data</button>
+                <h3>(last updated 4 hours ago)</h3>
+                
+                <div class="col leftCol">
+                asdfawegwaegawerg
+                </div>
+                <div class="col rightCol">
+                asdfawegwaegawerg
+                </div>
+            </div>
         </div>
     </body>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
 </html>

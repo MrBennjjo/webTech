@@ -97,6 +97,7 @@ html {
 
 /* Profile styles */
 .profile-container {
+	background-color: #00FF00;	
     width: 800px;
     margin: 0 auto; 
 }
@@ -105,19 +106,24 @@ html {
     background-image: url("bg-profile.jpg");
 }
 
-.col {
-    width: 40%;
-    
-    float: left;
-    
-    padding: 10%;
-    border: 1px solid red;
-    max-width: 400px;
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	height: 400px;
+	background-color: green;
+}
+.flex-item {
+	width: 250px;
+	height: 150px;
+	margin: 10px;
+	background-color: white;
 }
 
-.leftCol {
-    margin-left: 10%;
+.negative_data {
+	color: red;
 }
-.rightCol {
-    margin-right: 10%;
+
+.positive_data {
+	color: green;
 }

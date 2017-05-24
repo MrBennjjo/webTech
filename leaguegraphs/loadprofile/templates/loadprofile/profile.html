@@ -9,7 +9,6 @@
     
     <!-- Load Bootstrap and our own css files -->
     {% load static %}
-    <link rel="stylesheet" type='text/css' href="{% static "bootstrap/css/bootstrap.min.css" %}">
     <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}">
     </head>
     <body> 
@@ -21,18 +20,34 @@
                 <button type="button">Renew Data</button>
                 <h3>(last updated 4 hours ago)</h3>
                 
-                <div class="col leftCol">
-                asdfawegwaegawerg
-                </div>
-                <div class="col rightCol">
-                asdfawegwaegawerg
-                </div>
+				<div class = "flex-container">
+					<button type="button" class="flex-item">
+						<p> 
+							Biggest Comeback! 
+							<span class="positive_data">{{ comeback_value }} </span> 
+						</p>
+					</button>
+					<button type="button" class="flex-item">
+						<p> 
+							Biggest Throw! 
+							<span class="negative_data">{{ throw_value }} </span> 
+						</p>
+					</button>
+					<button type="button" class="flex-item">
+						<p> 
+							Biggest Stomp! 
+							<span class="positive_data">{{ stomp_value }} </span> 
+						</p>
+					</button>
+					<button type="button" class="flex-item">
+						<p> 
+							Biggest Loss! 
+							<span class="negative_data">{{ loss_value }} </span> 
+						</p>
+					</button>
+				</div>
             </div>
         </div>
     </body>
     
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
 </html>

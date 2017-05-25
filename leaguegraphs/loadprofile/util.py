@@ -42,22 +42,20 @@ def populateMatch(gameId, accountId):
         r = requests.get("https://euw1.api.riotgames.com/lol/match/v3/matches/"+str(gameId)+"?api_key=f083d3c8-2600-454b-ba0d-ac25bf9f5a1f")
         try:
             longDate = int(r.json()['gameCreation'])/1000
-        except KeyError:
-            return false
-        print("this somehow worked")
-        dateTimeStruct = time.gmtime(longDate)
-        print("struct is fine")
-        dateTime = time.strftime('%d/%m/%Y\n%H:%M', dateTimeStruct)
-        participantIndex = 0
-        if r.status_code not in [200, 404, 429]:
-            raise ApiException(r.status_code)
-        else:
-            for i in range(0, 10):
-                if str(r.json()['participantIdentities'][i]['player']['accountId']) == str(accountId):
-                    participantIndex = i
-                    print(participantIndex)
-        
-        try:
+
+            print("this somehow worked")
+            dateTimeStruct = time.gmtime(longDate)
+            print("struct is fine")
+            dateTime = time.strftime('%d/%m/%Y\n%H:%M', dateTimeStruct)
+            participantIndex = 0
+            if r.status_code not in [200, 404, 429]:
+                raise ApiException(r.status_code)
+            else:
+                for i in range(0, 10):
+                    if str(r.json()['participantIdentities'][i]['player']['accountId']) == str(accountId):
+                        participantIndex = i
+                        print(participantIndex)
+
             timeline = r.json()['participants'][participantIndex]['timeline']
             csPerMin = timeline['creepsPerMinDeltas']["0-10"]
             gpPerMin = timeline['goldPerMinDeltas']["0-10"]

@@ -42,7 +42,7 @@ function setDateAxis() {
         var date = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
         var time = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
         var datetime = dataSet[4-game]['game_date'].split('\n');
-        g.setAttribute("transform","translate("+(65 + 150 * game)+" "+430+")");
+        g.setAttribute("transform","translate("+(65 + 150 * game)+" "+435+")");
         date.setAttribute("x","0");
         date.setAttribute("dy","1.2em");
         time.setAttribute("x","15");

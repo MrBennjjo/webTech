@@ -1,53 +1,53 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"lang="en-GB" xml:lang="en-GB">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
     <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Profile Page</title>
     
-    <!-- Load Bootstrap and our own css files -->
+    
+    <!-- scripts -->
     {% load static %}
-    <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static "scripts/chartPlotter.js" %}"></script>
+    
+    
+    
+    <!-- Load Bootstrap and our own css files -->
+    
+    <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}"/>
     </head>
     <body> 
         <div class="bg bg-profile">
             <div class="profile-container">
-                <img src="http://ddragon.leagueoflegends.com/cdn/7.10.1/img/profileicon/1601.png">
+                <img src="http://ddragon.leagueoflegends.com/cdn/7.10.1/img/profileicon/1601.png"/>
                 <h1 class="profile-name">Gurglesprain</h1>
                 <h3>LVL 30</h3>
                 <button type="button">Renew Data</button>
                 <h3>(last updated 4 hours ago)</h3>
                 
-				<div class = "flex-container">
-					<button type="button" class="flex-item">
-						<p> 
-							Biggest Comeback! 
-							<span class="positive_data">{{ comeback_value }} </span> 
-						</p>
-					</button>
-					<button type="button" class="flex-item">
-						<p> 
-							Biggest Throw! 
-							<span class="negative_data">{{ throw_value }} </span> 
-						</p>
-					</button>
-					<button type="button" class="flex-item">
-						<p> 
-							Biggest Stomp! 
-							<span class="positive_data">{{ stomp_value }} </span> 
-						</p>
-					</button>
-					<button type="button" class="flex-item">
-						<p> 
-							Biggest Loss! 
-							<span class="negative_data">{{ loss_value }} </span> 
-						</p>
-					</button>
-				</div>
+                <select id="chartSelect" onchange="updateChart()">
+                  <option value="cs">cs average per min</option>
+                  <option value="gold">gold average per min</option>
+                  <option value="xp">xp average per min</option>
+                </select>
+                
+                <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+                    <rect width="100%" height="100%" fill="grey" />
+                    
+                    <polyline points="75,75 75,425 725,425" stroke="blue" fill="none" stroke-width="5"/>
+                    <polyline id="chartLine" points="50,100 200,350 350,300 500,50 650,100" stroke="white" fill="none" stroke-width="5"/>
+
+                    <circle title="asdfasdf" id="point0" cx="100" cy="100" r="6" fill="red" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
+                    <circle id="point1" cx="250" cy="350" r="6" fill="red" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
+                    <circle id="point2" cx="400" cy="300" r="6" fill="red" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
+                    <circle id="point3" cx="550" cy="50" r="6" fill="red" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/> 
+                    <circle id="point4" cx="700" cy="100" r="6" fill="red" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
+                    <text id="hoverText" x="0" y="0" font-family="Verdana" font-size="30"></text>
+                </svg>
             </div>
         </div>
     </body>
-    
 </html>

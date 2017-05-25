@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^home$', views.home, name='home'),
 	url(r'^form$', views.form, name='form'),
     url(r'^profile/(?P<accountId>[0-9]+)$', views.profile, name='profile'),
+    url(r'^profileData/(?P<accountId>[0-9]+)$', views.getProfileData, name='getProfileData'),
 ]

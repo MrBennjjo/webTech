@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.template import loader
+from django.core import serializers
 from loadprofile.util import findSummoner, populateDatabases, ApiException
-from loadprofile.models import Summoner
-# Create your views here.
-
+from loadprofile.models import Summoner, MatchSummary
 
 def base(request):
     return HttpResponseRedirect(reverse('loadprofile:home'))
@@ -35,3 +34,9 @@ def profile(request, accountId):
 	except ApiException as errormess:
 		return render(request, 'loadprofile/home.html', {'error_message': "Error of type " + errormess.exceptionType,})	
 	return render(request, 'loadprofile/profile.html', {'accountId': accountId, 'comeback_value': "10 golden pennies", 'throw_value': "a mars bar",})
+
+def getProfileData(request, accountId):
+    q = MatchSummary.objects.filter(summoner=Summoner.objects.get(account_id=accountId))
+    response = JsonResponse(list(q.values()), safe=False)
+    
+    return response

@@ -17,17 +17,23 @@ def populateDatabases(accountId):
     populateMatches(accountId)
 
 def populateMatches(accountId):
-    r = requests.get("https://euw1.api.riotgames.com/lol/match/v3/matchlists/by-account/"+accountId+"?endIndex=5&beginIndex=0&api_key=f083d3c8-2600-454b-ba0d-ac25bf9f5a1f")
+    r = requests.get("https://euw1.api.riotgames.com/lol/match/v3/matchlists/by-account/"+accountId+"?endIndex=10&beginIndex=0&api_key=f083d3c8-2600-454b-ba0d-ac25bf9f5a1f")
     if r.status_code not in [200, 429]:
         raise ApiException(r.status_code)
     else:
         matches = r.json()['matches']
-        for match in matches:
-            populateMatch(match['gameId'], accountId)
+        
+        matchAdded = 0
+        i = 0
+        while matchAdded < 5:
+            if populateMatch(matches[i]['gameId'], accountId): 
+                matchAdded += 1
+            i += 1
             
 def populateMatch(gameId, accountId):
     try: 
         q = MatchSummary.objects.get(match_id=gameId, summoner=Summoner.objects.get(account_id=accountId))
+        return True
     except MatchSummary.DoesNotExist:
         r = requests.get("https://euw1.api.riotgames.com/lol/match/v3/matches/"+str(gameId)+"?api_key=f083d3c8-2600-454b-ba0d-ac25bf9f5a1f")
         participantIndex = 0
@@ -38,18 +44,21 @@ def populateMatch(gameId, accountId):
                 if str(r.json()['participantIdentities'][i]['player']['accountId']) == str(accountId):
                     participantIndex = i
                     print(participantIndex)
-                    
         
-        timeline = r.json()['participants'][participantIndex]['timeline']
-        csPerMin = timeline['creepsPerMinDeltas']["0-10"]
-        gpPerMin = timeline['goldPerMinDeltas']["0-10"]
-        xpPerMin = timeline['xpPerMinDeltas']["0-10"]
-        won = r.json()['teams'][0]['win'] == 'Win'
-        if participantIndex > 4:
-            won = not won
-        ms = MatchSummary(match_id = gameId, win_loss = won, cs_average10 = csPerMin, gpm_average10 = gpPerMin, xpm_average10 = xpPerMin, summoner =Summoner.objects.get(account_id=accountId))
-        print("matchAdded")
-        ms.save()
+        try:
+            timeline = r.json()['participants'][participantIndex]['timeline']
+            csPerMin = timeline['creepsPerMinDeltas']["0-10"]
+            gpPerMin = timeline['goldPerMinDeltas']["0-10"]
+            xpPerMin = timeline['xpPerMinDeltas']["0-10"]
+            won = r.json()['teams'][0]['win'] == 'Win'
+            if participantIndex > 4:
+                won = not won
+            ms = MatchSummary(match_id = gameId, win_loss = won, cs_average10 = csPerMin, gpm_average10 = gpPerMin, xpm_average10 = xpPerMin, summoner =Summoner.objects.get(account_id=accountId))
+            ms.save()
+            return True
+            
+        except KeyError:
+            return False
         
 
 class ApiException(Exception):

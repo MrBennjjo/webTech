@@ -69,7 +69,7 @@ function circleHover(circle) {
     hoverText.setAttribute("y", y);
     
     var datasetIndex = (parseInt(circle.getAttribute("cx")) - 100) / 150;
-    hoverText.textContent = dataSet[datasetIndex][option].toFixed(1);
+    hoverText.textContent = dataSet[4 - datasetIndex][option].toFixed(1);
     circle.setAttribute("r", 20);
 }
 

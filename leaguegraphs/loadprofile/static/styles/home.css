@@ -120,7 +120,7 @@ html {
 	background-color: white;
 }
 
-.negative_data {
+.negative_data:hover{
 	color: red;
 }
 

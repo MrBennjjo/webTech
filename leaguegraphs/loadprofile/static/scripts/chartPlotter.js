@@ -1,18 +1,23 @@
 var profileUrl = window.location.href;
 var urlArray = profileUrl.split("profile");
 var dataUrl = urlArray[0] + "profileData" + urlArray[1];
-var chart;
-
-var points;
-var polyline;
-var dataSet;
-var option;
+var chart, points, polyline, dataSet, option;
+var textArray = [4];
+for(i=0; i<4; i++){
+    textArray[i] = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+    textArray[i].setAttribute("x", 60);
+    textArray[i].setAttribute("y", (i+1)*100 + 5);
+    textArray[i].setAttribute("text-anchor", "end");
+}
 var options = ["cs_average10", "gpm_average10", "xpm_average10"];
 
 $(document).ready(function() {
     points = document.getElementsByTagName("circle");
     polyline = document.getElementById("chartLine");
     chart = document.getElementById("svgChart");
+    for(i=0; i<4; i++){
+        chart.appendChild(textArray[i]);
+    }
     $.getJSON( dataUrl, function(data) {
         dataSet = data;
         console.log(dataSet);
@@ -59,22 +64,24 @@ function updateChart() {
     else option = options[2];
     
     var highest = dataSet[0][option];
-    var lowest = dataSet[0][option];
-    
-
+    var lowest = dataSet[0][option];    
     for(game = 1; game <5; game++) {
         if (dataSet[game][option] > highest) highest = dataSet[game][option];
         if (dataSet[game][option] < lowest) lowest = dataSet[game][option];
     }
     
-    var polyPoints = "";
+    textArray[0].textContent = highest.toFixed(1);
+    textArray[3].textContent = lowest.toFixed(1);
+    textArray[1].textContent = (highest-(highest-lowest)/3).toFixed(1);
+    textArray[2].textContent = (lowest+(highest-lowest)/3).toFixed(1);
+    var polyPointsy = [5];
+    var currPolyPointsy = [5];
     for(game = 0; game < 5; game++) {
-        
-        polyPoints += "" + (100 + 150 * game) + "," + scaleMap(dataSet[4 - game][option], highest, lowest) + " ";
-        //points[4 - game].setAttribute("cy", scaleMap(dataSet[game][option], highest, lowest));
+        polyPointsy[4-game] = scaleMap(dataSet[game][option], highest, lowest);
+        currPolyPointsy[game] = parseInt(points[game].getAttribute("cy"));
         animatePoint(points[4 - game], scaleMap(dataSet[game][option], highest, lowest));
     }
-    polyline.setAttribute("points", polyPoints);
+    animateLines(polyPointsy,currPolyPointsy);
 }
 
 function scaleMap(data, highest, lowest) {
@@ -137,3 +144,34 @@ function animatePoint(circle, newY) {
         }
     }
 }
+
+function animateLines(polyPointsy, currPolyPointsy){
+    var interval = 1;
+    var intervals = [5];
+    var currYs = currPolyPointsy;
+    for(i=0; i<5; i++){
+        if(currYs[i] > polyPointsy[i]) intervals[i] = -interval;
+        else intervals[i] = interval;
+    }
+    var id = setInterval(frames, 2);
+    function frames() {
+        var cnt = 0;
+        var polyPoints = "";
+        for(i=0; i<5; i++){
+            if( currYs[i] != polyPointsy[i] ){
+                currYs[i] += intervals[i];
+            } 
+            else cnt++;
+            polyPoints+= (100 + 150 * i)+","+currYs[i]+" ";
+        }
+        if(cnt==5) clearInterval(id);
+        else{
+            polyline.setAttribute('points', polyPoints);
+        }
+    }
+}
+            
+/*function getMatch(circle){
+    var datasetIndex = (parseInt(circle.getAttribute("cx")) - 100) / 150;
+    var matchId = dataSet[4 - datasetIndex]['match_id'];
+ */   

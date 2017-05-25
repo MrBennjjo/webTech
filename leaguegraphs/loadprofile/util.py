@@ -40,7 +40,10 @@ def populateMatch(gameId, accountId):
         return True
     except MatchSummary.DoesNotExist:
         r = requests.get("https://euw1.api.riotgames.com/lol/match/v3/matches/"+str(gameId)+"?api_key=f083d3c8-2600-454b-ba0d-ac25bf9f5a1f")
-        longDate = int(r.json()['gameCreation'])/1000
+        try:
+            longDate = int(r.json()['gameCreation'])/1000
+        except KeyError:
+            return false
         print("this somehow worked")
         dateTimeStruct = time.gmtime(longDate)
         print("struct is fine")

@@ -67,12 +67,12 @@ function updateChart() {
         if (dataSet[game][option] < lowest) lowest = dataSet[game][option];
     }
     
-    
     var polyPoints = "";
     for(game = 0; game < 5; game++) {
         
         polyPoints += "" + (100 + 150 * game) + "," + scaleMap(dataSet[4 - game][option], highest, lowest) + " ";
-        points[4 - game].setAttribute("cy", scaleMap(dataSet[game][option], highest, lowest));
+        //points[4 - game].setAttribute("cy", scaleMap(dataSet[game][option], highest, lowest));
+        animatePoint(points[4 - game], scaleMap(dataSet[game][option], highest, lowest));
     }
     polyline.setAttribute("points", polyPoints);
 }
@@ -81,7 +81,7 @@ function scaleMap(data, highest, lowest) {
     var difference = highest - lowest;
     
     var scale = (data - lowest) / difference;
-    return 400 - (scale * 300);
+    return parseInt(400 - (scale * 300));
 }
 
 function circleHover(circle) {
@@ -93,11 +93,47 @@ function circleHover(circle) {
     
     var datasetIndex = (parseInt(circle.getAttribute("cx")) - 100) / 150;
     hoverText.textContent = dataSet[4 - datasetIndex][option].toFixed(1);
-    circle.setAttribute("r", 20);
+    
+    var r = 6;
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (r == 20) {
+            clearInterval(id);
+        } else {
+            r++;
+            circle.setAttribute("r", r);
+        }
+    }
+    //circle.setAttribute("r", 20);
 }
 
 function circleUnhover(circle) {
     var hoverText = document.getElementById("hoverText");
     hoverText.textContent = "";
-    circle.setAttribute("r", 6);
+    
+    var r = 20;
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (r == 6) {
+            clearInterval(id);
+        } else {
+            r--;
+            circle.setAttribute("r", r);
+        }
+    }
+}
+
+function animatePoint(circle, newY) {
+    var currY = parseInt(circle.getAttribute("cy"));
+    var interval = 1;
+    if (newY < currY) interval = -1;
+    var id = setInterval(frame, 3);
+    function frame() {
+        if (currY == newY) {
+            clearInterval(id);
+        } else {
+            currY += interval;
+            circle.setAttribute("cy", currY);
+        }
+    }
 }

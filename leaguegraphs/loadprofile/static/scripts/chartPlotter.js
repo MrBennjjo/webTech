@@ -1,6 +1,7 @@
 var profileUrl = window.location.href;
 var urlArray = profileUrl.split("profile");
 var dataUrl = urlArray[0] + "profileData" + urlArray[1];
+var chart;
 
 var points;
 var polyline;
@@ -11,11 +12,12 @@ var options = ["cs_average10", "gpm_average10", "xpm_average10"];
 $(document).ready(function() {
     points = document.getElementsByTagName("circle");
     polyline = document.getElementById("chartLine");
-    
+    chart = document.getElementById("svgChart");
     $.getJSON( dataUrl, function(data) {
         dataSet = data;
         console.log(dataSet);
         setWinCircles();
+        setDateAxis();
         updateChart();
     })
 })
@@ -25,6 +27,27 @@ function setWinCircles() {
         if (dataSet[game]['win_loss'] == true) {
             points[4 - game].style.fill = "green";
         }
+    }
+}
+
+function setDateAxis() {
+    for(game = 0; game<5; game++){
+        var dateText = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+        var g = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+        var date = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
+        var time = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
+        var datetime = dataSet[4-game]['game_date'].split('\n');
+        g.setAttribute("transform","translate("+(65 + 150 * game)+" "+430+")");
+        date.setAttribute("x","0");
+        date.setAttribute("dy","1.2em");
+        time.setAttribute("x","15");
+        time.setAttribute("dy","1.2em");
+        date.textContent=datetime[0];
+        time.textContent=datetime[1];
+        dateText.appendChild(date);
+        dateText.appendChild(time);
+        g.appendChild(dateText);
+        chart.appendChild(g);
     }
 }
 

@@ -23,9 +23,18 @@ class MatchSummary(models.Model):
     cs_average10 = models.FloatField()
     gpm_average10 = models.FloatField()
     xpm_average10 = models.FloatField()
-    game_date = models.CharField(max_length=100)
+    game_date = models.BigIntegerField()
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
+    
+    def clear_old_games(account_id):
+        query = MatchSummary.objects.filter(summoner=Summoner.objects.get(account_id=account_id)).order_by('game_date')
+        cutoffindex = query.count() - 5
+        datecutoff = query[cutoffindex].game_date
+        deletequery = query.filter(game_date__lt=datecutoff)
+        deletequery.delete()
+            
         
+    
     def __str__(self):
         return '%s, %d' % (self.summoner, self.match_id)    
 

@@ -19,8 +19,10 @@ def populateDatabases(accountId):
 
 def populateMatches(accountId):
     r = limitedRequest("https://euw1.api.riotgames.com/lol/match/v3/matchlists/by-account/"+accountId+"?queue=440&queue=420&queue=410&endIndex=10&beginIndex=0&api_key=f083d3c8-2600-454b-ba0d-ac25bf9f5a1f")
-    if r.status_code not in [200, 429]:
+    if r.status_code not in [200, 429, 404]:
         raise ApiException(r.status_code, "Server error")
+    elif r.status_code == 404:
+        raise ApiException(r.status_code, "0 ranked games played")
     else:
         matches = r.json()['matches']
         if len(matches) < 5 :

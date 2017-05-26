@@ -31,7 +31,7 @@ def profile(request, accountId):
         return render(request, 'loadprofile/home.html', {'error_message': errormess.exceptionType,})    
     profile_icon = get_object_or_404(Summoner, account_id = accountId).profile_icon_id
     summoner_name = get_object_or_404(Summoner, account_id = accountId).summoner_name
-    return render(request, 'loadprofile/profile.html', {'accountId': accountId, 'profile_icon': profile_icon , 'summoner_name': summoner_name.upper(),})
+    return render(request, 'loadprofile/profile.html', {'accountId': accountId, 'profile_icon': profile_icon , 'summoner_name': summoner_name,})
 
 def getProfileData(request, accountId):
     q = MatchSummary.objects.filter(summoner=Summoner.objects.get(account_id=accountId))

@@ -14,7 +14,7 @@ html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%;
+    background-color: grey;
 }
 
 .btn {
@@ -35,7 +35,7 @@ html {
 /* Homepage styles */
 .bg-homepage {
     background-image: url("bg-homepage.jpg");
-	
+	height: 100%
 }
 
 .btn-homepage {
@@ -57,6 +57,7 @@ html {
 .form-box {
     display: block;
     text-align: center;
+    padding: 15% 0;
 }
 
 .form {
@@ -65,9 +66,7 @@ html {
   /*text-align: left;*/
   min-width: 330px;
   padding: 30px;
-  margin: 20%;
-  
-  background-color: rgba(255, 255, 255, 0.7);
+  background-image: url("transparentContainer.png");
   border: 2px solid #f4bc42;
   border-radius: 5px;
   box-shadow: 0px 0px 10px #000000;
@@ -97,14 +96,24 @@ html {
 
 /* Profile styles */
 .profile-container {
-	background-image: url("feltBackgroundTransparent.png");	
+	background-image: url("transparentContainer.png");	
     max-width: 950px;
     height: 100%;
     margin: 0 auto; 
 }
 
 .bg-profile {
-    background-image: url("bg-profile.jpg");
+    
+}
+
+.profileHeading{
+    text-align: center;
+    font-size: 20px;
+    color: #232323;
+    background-color: RGBA(0,0,0,0.2);
+    margin: 0;
+    margin-top: 10px;
+    padding: 10px 0;
 }
 
 .negative_data:hover{
@@ -117,10 +126,10 @@ html {
 
 .profile-name {
     font-size: 65px;
-    font-family: sans-serif;
-    text-shadow: 0 5px 5px white;
-    font-weight: bold;
-    color: gold;
+    font-family: 'Passion One', cursive, sans-serif;
+    color: #232323;
+    text-shadow: 2px 2px 0px #ffffff;
+    margin-left: 30px;
 }
 
 .flex-container {
@@ -129,11 +138,12 @@ html {
     width: 100%;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: bold;
+    color: #232323;
     font-family: sans-serif;
 }
-
+.matchData{
+    background-color: RGBA(0,0,0,0.05);
+}
 .matchImages {
     padding: 10px;
     margin: 10px;
@@ -145,6 +155,7 @@ html {
     margin: 10px;
     width: 140px;
     text-align: center;
+    font-weight: bold;
 }
 
 .matchStats {
@@ -152,10 +163,21 @@ html {
     margin: 10px;
     width: 100px;
     text-align: center;
+    font-weight: bold;
 }
 
 .matchItems {
     display: inline;
     margin: 10px;
     width: 280px;
+}
+
+.header-container {
+    padding: 35px 0;
+    background-color: RGBA(0,0,0,0.2);
+}
+.graphRadio{
+    text-align: center;
+    display: block;
+    color: #232323;
 }

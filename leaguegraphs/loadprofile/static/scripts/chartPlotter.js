@@ -17,6 +17,7 @@ $(document).ready(function() {
     points = document.getElementsByTagName("circle");
     polyline = document.getElementById("chartLine");
     chart = document.getElementById("svgChart");
+    initialradio = document.getElementById("graphCS");
     for(i=0; i<4; i++){
         chart.appendChild(textArray[i]);
     }
@@ -25,7 +26,7 @@ $(document).ready(function() {
         console.log(dataSet);
         setWinCircles();
         setDateAxis();
-        updateChart();
+        updateChart(initialradio);
         getMatch(points[4]);
     })
 })
@@ -62,11 +63,10 @@ function setDateAxis() {
     }
 }
 
-function updateChart() {
-    var select = document.getElementById("chartSelect");
+function updateChart(radiobutton) {
     
-    if (select.value == 'cs') option = options[0];
-    else if (select.value == 'gold') option = options[1];
+    if (radiobutton.value == 'cs') option = options[0];
+    else if (radiobutton.value == 'gold') option = options[1];
     else option = options[2];
     
     var highest = dataSet[0][option];
@@ -179,6 +179,7 @@ function animateLines(polyPointsy, currPolyPointsy){
             
 function getMatch(circle) {
     console.log("Hi there");
+    
     var index = 4 - ((parseInt(circle.getAttribute("cx")) - 100) / 150);
     var champ = document.getElementById("champImg");
     var spell1Img = document.getElementById("spell1Img");
@@ -206,6 +207,8 @@ function getMatch(circle) {
         }
         else document.getElementById("item" + i).setAttribute("src", noItemImg);
     }
+    
+    var backgroundUrl = document.getElementById("profileBackground").style.backgroundImage = "url('http://ddragon.leagueoflegends.com/cdn/img/champion//splash/"+champKey+"_0.jpg')";
 }
 
 function numFormat(x) {

@@ -82,7 +82,7 @@ html {
 .form-box {
     display: block;
     text-align: center;
-    padding: 15% 0;
+    margin-top: 100px;
 }
 
 .form {

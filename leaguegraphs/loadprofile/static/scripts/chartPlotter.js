@@ -4,6 +4,7 @@ var dataUrl = urlArray[0] + "profileData" + urlArray[1];
 var chart, points, polyline, dataSet, option;
 var textArray = [4];
 var spells = {1 : "SummonerBoost", 3 : "SummonerExhaust", 4 : "SummonerFlash", 6 : "SummonerHaste", 7 : "SummonerHeal", 11 : "SummonerSmite", 12 : "SummonerTeleport", 14 : "SummonerDot", 21 : "SummonerBarrier"}; 
+var selectedCircle;
 
 for(i=0; i<4; i++){
     textArray[i] = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -23,7 +24,6 @@ $(document).ready(function() {
     }
     $.getJSON( dataUrl, function(data) {
         dataSet = data;
-        console.log(dataSet);
         setWinCircles();
         setDateAxis();
         updateChart(initialradio);
@@ -108,6 +108,7 @@ function circleHover(circle) {
     hoverText.textContent = dataSet[4 - datasetIndex][option].toFixed(1);
     
     var r = 6;
+    if (circle == selectedCircle) r = 15;
     var id = setInterval(frame, 10);
     function frame() {
         if (r == 20) {
@@ -123,11 +124,13 @@ function circleHover(circle) {
 function circleUnhover(circle) {
     var hoverText = document.getElementById("hoverText");
     hoverText.textContent = "";
+    var minR = 6;
+    if (circle == selectedCircle) minR = 15;
     
     var r = 20;
     var id = setInterval(frame, 10);
     function frame() {
-        if (r == 6) {
+        if (r == minR) {
             clearInterval(id);
         } else {
             r--;
@@ -178,7 +181,14 @@ function animateLines(polyPointsy, currPolyPointsy){
 }
             
 function getMatch(circle) {
-    console.log("Hi there");
+    if (selectedCircle != null) {
+        selectedCircle.setAttribute("r", "6");
+        selectedCircle.setAttribute("stroke-width", "0");
+    }
+    selectedCircle = circle;
+    selectedCircle.setAttribute("r", "15");
+    circle.setAttribute("stroke", "#000000");
+    circle.setAttribute("stroke-width", "3");
     
     var index = 4 - ((parseInt(circle.getAttribute("cx")) - 100) / 150);
     var champ = document.getElementById("champImg");
@@ -188,6 +198,7 @@ function getMatch(circle) {
     var spell2 = spells[dataSet[index]['spell2']];
     var items = dataSet[index]['items'].split(",");
     
+    //console.log()
     var champKey = dataSet[6][dataSet[index]['champion']]['key'];
     champ.setAttribute("src", "http://ddragon.leagueoflegends.com/cdn/" + dataSet[5] + "/img/champion/" + champKey + ".png");
     spell1Img.setAttribute("src", "http://ddragon.leagueoflegends.com/cdn/" + dataSet[5] + "/img/spell/" + spell1 +".png");
@@ -208,7 +219,27 @@ function getMatch(circle) {
         else document.getElementById("item" + i).setAttribute("src", noItemImg);
     }
     
-    var backgroundUrl = document.getElementById("profileBackground").style.backgroundImage = "url('http://ddragon.leagueoflegends.com/cdn/img/champion//splash/"+champKey+"_0.jpg')";
+    var alpha = 0.2;
+    var interval = 0.01;
+    var backgroundFade = document.getElementById("backgroundFade");
+    var id = setInterval(frames, 5);
+    var loaded = false;
+    var newImg = new Image();
+    newImg.onload = function() { loaded = true; }
+    newImg.src = "http://ddragon.leagueoflegends.com/cdn/img/champion//splash/" + champKey + "_0.jpg";
+    function frames() {
+        alpha += interval;
+        backgroundFade.style.backgroundColor = "RGBA(128,128,128," + alpha + ")";
+        if(alpha <= 0.2) clearInterval(id);
+        else if (alpha >= 1.0){
+            interval = 0;
+            
+            if (loaded == true) {
+                document.getElementById("profileBackground").style.backgroundImage = "url('" + newImg.src + "')";
+                interval = -0.005;
+            }
+        }
+    }
 }
 
 function numFormat(x) {

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="186.72549mm"
+   height="48.475471mm"
+   viewBox="0 0 186.72549 48.475471"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="529.52772"
+     inkscape:cy="49.653927"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2298"
+     inkscape:window-height="1348"
+     inkscape:window-x="1216"
+     inkscape:window-y="52"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-12.092463,-120.29743)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:49.33722687px;line-height:1.25;font-family:'Adobe Garamond Pro';-inkscape-font-specification:'Adobe Garamond Pro';letter-spacing:0px;word-spacing:0px;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0.92507303"
+       x="53.529762"
+       y="174.74651"
+       id="text3700"
+       transform="scale(1.0481512,0.95406082)"><tspan
+         sodipodi:role="line"
+         id="tspan3698"
+         x="53.529762"
+         y="174.74651"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:88.80701447px;font-family:'Colonna MT';-inkscape-font-specification:'Colonna MT Italic';fill:#800000;stroke-width:0.92507303">G</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.00291824px;line-height:1.25;font-family:'Adobe Garamond Pro';-inkscape-font-specification:'Adobe Garamond Pro';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.92507303"
+       x="106.24477"
+       y="170.23851"
+       id="text4529"
+       transform="scale(1.0481512,0.95406082)"><tspan
+         sodipodi:role="line"
+         id="tspan4527"
+         x="106.24477"
+         y="170.23851"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:34.53606033px;font-family:'lucida fax';-inkscape-font-specification:'lucida fax Italic';fill:#800000;stroke-width:0.92507303">aphs</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.00291824px;line-height:1.25;font-family:'Adobe Garamond Pro';-inkscape-font-specification:'Adobe Garamond Pro';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.92507303"
+       x="10.293879"
+       y="147.48221"
+       id="text4533"
+       transform="scale(1.0481512,0.95406082)"><tspan
+         sodipodi:role="line"
+         id="tspan4531"
+         x="10.293879"
+         y="147.48221"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.60233688px;font-family:'Lucida Fax';-inkscape-font-specification:'Lucida Fax';fill:#000055;stroke-width:0.92507303"><tspan
+           style="font-weight:normal;fill:#000055;stroke-width:0.92507303"
+           id="tspan4553">Lea</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.00291824px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.92507303"
+       x="106.15672"
+       y="147.48398"
+       id="text4565"
+       transform="scale(1.0481512,0.95406082)"><tspan
+         sodipodi:role="line"
+         id="tspan4563"
+         x="106.15672"
+         y="147.48398"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.60233688px;font-family:'Lucida Fax';-inkscape-font-specification:'Lucida Fax';fill:#000055;stroke-width:0.92507303">ue</tspan></text>
+  </g>
+</svg>

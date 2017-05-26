@@ -35,7 +35,32 @@ html {
 /* Homepage styles */
 .bg-homepage {
     background-image: url("bg-homepage.jpg");
-	height: 100%
+	height: 100%;
+}
+
+.home-banner {
+    height: 100px;
+    background-image: url("transparentContainer.png");
+    /*display: inline;*/
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 15px #000000;
+    margin-bottom: 30px;
+}
+
+.banner-text {
+    width: 100%;
+    height: 100%;
+    font-size: 40px;
+    font-weight: normal;
+    font-family: 'Passion One', sans-serif;
+    color: #232323;
+    text-shadow: 2px 2px 0px #828282;
+    margin-left: 50px;
 }
 
 .btn-homepage {
@@ -67,9 +92,8 @@ html {
   min-width: 330px;
   padding: 30px;
   background-image: url("transparentContainer.png");
-  border: 2px solid #f4bc42;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px #000000;
+
+  box-shadow: 0px 0px 15px #000000;
 }
 
 .form-label {
@@ -100,10 +124,7 @@ html {
     max-width: 950px;
     height: 100%;
     margin: 0 auto; 
-}
-
-.bg-profile {
-    
+    box-shadow: 0px 0px 10px #000000;
 }
 
 .profileHeading{
@@ -128,7 +149,7 @@ html {
     font-size: 65px;
     font-family: 'Passion One', cursive, sans-serif;
     color: #232323;
-    text-shadow: 2px 2px 0px #ffffff;
+    text-shadow: 2px 2px 0px #828282;
     margin-left: 30px;
 }
 
@@ -180,4 +201,13 @@ html {
     text-align: center;
     display: block;
     color: #232323;
+}
+
+.radioText {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.background-fade {
+    background-color: RGBA(128, 128, 128, 0.2);
 }

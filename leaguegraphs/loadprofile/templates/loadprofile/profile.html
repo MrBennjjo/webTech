@@ -21,71 +21,76 @@
     <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet"/>
     </head>
     <body> 
-        <div class="bg bg-profile" id = "profileBackground">
-            <div class="profile-container">
-                <div class="flex-container header-container">
-                    <img width="64" height="64" src="http://ddragon.leagueoflegends.com/cdn/7.10.1/img/profileicon/{{ profile_icon }}.png"/>
-                    <span class="profile-name">{{ summoner_name }}</span>
+        <div class="bg bg-profile2" id = "profileBackground">
+            <div class="background-fade" id="backgroundFade">
+                <div class = "home-banner">
+                    <a href="{% url 'loadprofile:home' %}"><img height = "80px" src = "{% static "styles/logo.png" %}"/></a>
+                    <div><h1 class = "banner-text">Interesting Graphs for League of Legends</h1></div>
                 </div>
-               
-                <svg id = "svgChart" version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
-                    <style>
-                        .dataPoint {cursor: pointer; cursor: hand; }
-                        text {fill: #232323; font-family: sans-serif; font-weight: bold}
+                <div class="profile-container">
+                    <div class="flex-container header-container">
+                        <img width="64" height="64" src="http://ddragon.leagueoflegends.com/cdn/7.10.1/img/profileicon/{{ profile_icon }}.png"/>
+                        <span class="profile-name">{{ summoner_name }}</span>
+                    </div>
+                    <svg id = "svgChart" version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+                        <style>
+                            .dataPoint {cursor: pointer; cursor: hand; }
+                            text {fill: #232323; font-family: sans-serif; font-weight: bold}
+                            
+                        </style>
+                        <text x="50%" y="45" text-anchor="middle" font-size = "20">Average CS, XPM and GPM during first 10 minutes </text>
+                        <path d="M 65,100 H 75 M 65,200 H 75 M 65,300 H 75 M 65,400 H 75" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
+                        <path d="M 100,435 V 425 M 250,435 V 425 M 400,435 V 425 M 550,435 V 425 M 700,435 V 425" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
+                        <polyline points="75,75 75,425 725,425" stroke="#7f7f7f" fill="none" stroke-width="5"/>
+                        <polyline id="chartLine" points="100,250 250,250 400,250 550,250 700,250" stroke="white" fill="none" stroke-width="5"/>
+                        <g class="dataPoint" fill="red">
+                            <circle cx="100" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                            <circle cx="250" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                            <circle cx="400" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                            <circle cx="550" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/> 
+                            <circle cx="700" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                        </g>
+                        <text id="hoverText" x="0" y="0"  font-size="30"></text>
+                    </svg>
                         
-                    </style>
-                    <text x="50%" y="45" text-anchor="middle" font-size = "20">Average CS, XPM and GPM during first 10 minutes </text>
-                    <path d="M 65,100 H 75 M 65,200 H 75 M 65,300 H 75 M 65,400 H 75" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
-                    <path d="M 100,435 V 425 M 250,435 V 425 M 400,435 V 425 M 550,435 V 425 M 700,435 V 425" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
-                    <polyline points="75,75 75,425 725,425" stroke="#7f7f7f" fill="none" stroke-width="5"/>
-                    <polyline id="chartLine" points="100,250 250,250 400,250 550,250 700,250" stroke="white" fill="none" stroke-width="5"/>
-                    <g class="dataPoint" fill="red">
-                        <circle cx="100" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
-                        <circle cx="250" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
-                        <circle cx="400" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
-                        <circle cx="550" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/> 
-                        <circle cx="700" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
-                    </g>
-                    <text id="hoverText" x="0" y="0"  font-size="30"></text>
-                </svg>
+                    <form class = "graphRadio">
+                      <input id = "graphCS" type="radio" name="graph" value="cs" checked="True" onmousedown="updateChart(this)"/> 
+                      <label class = "radioText" for = "graphCS"> CS/min </label>
+                      <input id = "graphGPM" type="radio" name="graph" value="gold" onmousedown="updateChart(this)"/> 
+                      <label class = "radioText" for = "graphGPM"> Gold/min </label>
+                      <input id = "graphXPM" type="radio" name="graph" value="xpm" onmousedown="updateChart(this)"/> 
+                      <label class = "radioText" for = "graphXPM"> XP/min </label>
+                    </form>
                     
-                <form class = "graphRadio">
-                  <input id = "graphCS" type="radio" name="graph" value="cs" checked="True" onmousedown="updateChart(this)"/> 
-                  <label for = "graphCS"> CS/min </label>
-                  <input id = "graphGPM" type="radio" name="graph" value="gold" onmousedown="updateChart(this)"/> 
-                  <label for = "graphGPM"> Gold/min </label>
-                  <input id = "graphXPM" type="radio" name="graph" value="xpm" onmousedown="updateChart(this)"/> 
-                  <label for = "graphXPM"> XP/min </label>
-                </form>
-                
-                <h1 class = "profileHeading"> Selected Match Data</h1>
-                
-                <div class="flex-container matchData">
-                    <div class="matchImages">
-                        <img id="champImg" height="120" width="120" src="{% static "styles/noPicture.png" %}"/>
-                        <div>
-                            <img id="spell1Img" height="57" width="57" src="{% static "styles/noPicture.png" %}"/>
-                            <img id="spell2Img" height="57" width="57" src="{% static "styles/noPicture.png" %}"/>
+                    <h1 class = "profileHeading"> Selected Match Data</h1>
+                    
+                    <div class="flex-container matchData">
+                        <div class="matchImages">
+                            <img id="champImg" height="120" width="120" src="{% static "styles/noPicture.png" %}"/>
+                            <div>
+                                <img id="spell1Img" height="57" width="57" src="{% static "styles/noPicture.png" %}"/>
+                                <img id="spell2Img" height="57" width="57" src="{% static "styles/noPicture.png" %}"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="matchKDA">
-                        <p class="matchText" id="role">Role: </p>
-                        <p class="matchText" id="kda">KDA: </p>
-                        <p class="matchText" id="kdaRatio">KDA ratio: </p>
-                    </div>
-                    <div class="matchStats">
-                        <p class="matchText" id="lvl">lvl </p>
-                        <p class="matchText" id="endCS"> CS</p>
-                        <p class="matchText" id="endGold"> g</p>
-                    </div>
-                    <div class="matchItems">
-                        <img id="item0" src="{% static "styles/noPicture.png" %}"/>
-                        <img id="item1" src="{% static "styles/noPicture.png" %}"/>
-                        <img id="item2" src="{% static "styles/noPicture.png" %}"/>
-                        <img id="item6" src="{% static "styles/noPicture.png" %}"/>
-                        <img id="item3" src="{% static "styles/noPicture.png" %}"/>
-                        <img id="item4" src="{% static "styles/noPicture.png" %}"/>
-                        <img id="item5" src="{% static "styles/noPicture.png" %}"/>
+                        <div class="matchKDA">
+                            <p class="matchText" id="role">Role: </p>
+                            <p class="matchText" id="kda">KDA: </p>
+                            <p class="matchText" id="kdaRatio">KDA ratio: </p>
+                        </div>
+                        <div class="matchStats">
+                            <p class="matchText" id="lvl">lvl </p>
+                            <p class="matchText" id="endCS"> CS</p>
+                            <p class="matchText" id="endGold"> g</p>
+                        </div>
+                        <div class="matchItems">
+                            <img id="item0" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="item1" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="item2" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="item6" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="item3" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="item4" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="item5" src="{% static "styles/noPicture.png" %}"/>
+                        </div>
                     </div>
                 </div>
             </div>

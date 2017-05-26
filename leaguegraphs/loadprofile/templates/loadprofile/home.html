@@ -10,9 +10,16 @@
         <!-- Load Bootstrap and our own css files -->
         {% load static %}
         <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}" />
+        <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet"/>
+        
     </head>
     <body> 
         <div class="bg bg-homepage">
+            <div class = "home-banner">
+                <a href="{% url 'loadprofile:home' %}"><img height = "80px" src = "{% static "styles/logo.png" %}"/></a>
+                <div><h1 class = "banner-text">Interesting Graphs for League of Legends</h1></div>
+            </div>
+        
             <div class="form-box">
                 <form class="form" action="{% url 'loadprofile:form' %}" method="post">
 				{% csrf_token %}

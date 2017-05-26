@@ -3,6 +3,8 @@ var urlArray = profileUrl.split("profile");
 var dataUrl = urlArray[0] + "profileData" + urlArray[1];
 var chart, points, polyline, dataSet, option;
 var textArray = [4];
+var spells = {1 : "SummonerBoost", 3 : "SummonerExhaust", 4 : "SummonerFlash", 6 : "SummonerHaste", 7 : "SummonerHeal", 11 : "SummonerSmite", 12 : "SummonerTeleport", 14 : "SummonerDot", 21 : "SummonerBarrier"}; 
+
 for(i=0; i<4; i++){
     textArray[i] = document.createElementNS("http://www.w3.org/2000/svg", 'text');
     textArray[i].setAttribute("x", 60);
@@ -24,6 +26,7 @@ $(document).ready(function() {
         setWinCircles();
         setDateAxis();
         updateChart();
+        getMatch(points[4]);
     })
 })
 
@@ -174,7 +177,37 @@ function animateLines(polyPointsy, currPolyPointsy){
     }
 }
             
-/*function getMatch(circle){
-    var datasetIndex = (parseInt(circle.getAttribute("cx")) - 100) / 150;
-    var matchId = dataSet[4 - datasetIndex]['match_id'];
- */   
+function getMatch(circle) {
+    console.log("Hi there");
+    var index = 4 - ((parseInt(circle.getAttribute("cx")) - 100) / 150);
+    var champ = document.getElementById("champImg");
+    var spell1Img = document.getElementById("spell1Img");
+    var spell2Img = document.getElementById("spell2Img");
+    var spell1 = spells[dataSet[index]['spell1']];
+    var spell2 = spells[dataSet[index]['spell2']];
+    var items = dataSet[index]['items'].split(",");
+    
+    var champKey = dataSet[6][dataSet[index]['champion']]['key'];
+    champ.setAttribute("src", "http://ddragon.leagueoflegends.com/cdn/" + dataSet[5] + "/img/champion/" + champKey + ".png");
+    spell1Img.setAttribute("src", "http://ddragon.leagueoflegends.com/cdn/" + dataSet[5] + "/img/spell/" + spell1 +".png");
+    spell2Img.setAttribute("src", "http://ddragon.leagueoflegends.com/cdn/" + dataSet[5] + "/img/spell/" + spell2 +".png");
+    document.getElementById("role").textContent = "Role: " + dataSet[index]['role'];
+    document.getElementById("kda").textContent = "KDA: " + dataSet[index]['kills'] + "/" + dataSet[index]['deaths'] + "/"+ dataSet[index]['assists'];
+    var deaths = dataSet[index]['deaths'];
+    if (deaths == 0) deaths = 1;
+    document.getElementById("kdaRatio").textContent = "KDA ratio: " + ((dataSet[index]['kills'] + dataSet[index]['assists']) / deaths).toFixed(1);
+    document.getElementById("lvl").textContent = "lvl " + dataSet[index]['lvl'];
+    document.getElementById("endCS").textContent = dataSet[index]['endCS'] + "CS";
+    document.getElementById("endGold").textContent = numFormat(dataSet[index]['endGold']) + "g";
+    
+    for (i = 0; i < 7; i++) {
+        if (items[i] != 0) {
+            document.getElementById("item" + i).setAttribute("src", "http://ddragon.leagueoflegends.com/cdn/" + dataSet[5] + "/img/item/" + items[i] +".png");
+        }
+        else document.getElementById("item" + i).setAttribute("src", noItemImg);
+    }
+}
+
+function numFormat(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

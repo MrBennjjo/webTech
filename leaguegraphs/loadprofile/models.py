@@ -19,11 +19,25 @@ class Summoner(models.Model):
 #provides a summary view of a match, from team 1's perspective with relevant query data
 class MatchSummary(models.Model):
     match_id = models.BigIntegerField()
+    #data for profile chart
     win_loss = models.BooleanField()
     cs_average10 = models.FloatField()
     gpm_average10 = models.FloatField()
     xpm_average10 = models.FloatField()
     game_date = models.BigIntegerField()
+    # data for individual match summary
+    role = models.CharField(max_length=100)
+    champion = models.IntegerField()
+    spell1 = models.IntegerField()
+    spell2 = models.IntegerField()
+    kills = models.IntegerField()
+    deaths = models.IntegerField()
+    assists = models.IntegerField()
+    lvl = models.IntegerField()
+    endGold = models.IntegerField()
+    endCS = models.IntegerField()
+    items = models.CharField(max_length=100)
+    
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     
     def clear_old_games(account_id):

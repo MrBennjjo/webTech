@@ -98,7 +98,7 @@ html {
 /* Profile styles */
 .profile-container {
 	background-image: url("feltBackgroundTransparent.png");	
-    max-width: 850px;
+    max-width: 950px;
     height: 100%;
     margin: 0 auto; 
 }
@@ -121,4 +121,41 @@ html {
     text-shadow: 0 5px 5px white;
     font-weight: bold;
     color: gold;
+}
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.matchImages {
+    padding: 10px;
+    margin: 10px;
+    width: 120px;
+}
+
+.matchKDA {
+    display: inline;
+    margin: 10px;
+    width: 140px;
+    text-align: center;
+}
+
+.matchStats {
+    display: inline;
+    margin: 10px;
+    width: 100px;
+    text-align: center;
+}
+
+.matchItems {
+    display: inline;
+    margin: 10px;
+    width: 280px;
 }

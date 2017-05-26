@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.template import loader
 from django.core import serializers
-from loadprofile.util import findSummoner, populateDatabases, ApiException
+from loadprofile.util import findSummoner, populateDatabases, getVersion, getChampData, ApiException
 from loadprofile.models import Summoner, MatchSummary
 
 def base(request):
@@ -16,12 +16,10 @@ def form(request):
     postName = request.POST['summonerName']
     try:
         accountId = Summoner.objects.get(summoner_name__iexact=postName).account_id
-        print("Used Database")
         return HttpResponseRedirect(reverse('loadprofile:profile', args = [accountId]))
     except Summoner.DoesNotExist:
         try:
             accountId = findSummoner(postName)
-            print("Used API")
             return HttpResponseRedirect(reverse('loadprofile:profile', args = [accountId]))
         except ApiException as errormess:                
             return render(request, 'loadprofile/home.html', {'error_message': errormess.exceptionType,})    
@@ -37,6 +35,13 @@ def profile(request, accountId):
 
 def getProfileData(request, accountId):
     q = MatchSummary.objects.filter(summoner=Summoner.objects.get(account_id=accountId))
-    response = JsonResponse(list(q.values()), safe=False)
+    version = getVersion()
+    champData = getChampData()
+    qList = list(q.values())
+    qList.append(version)
+    qList.append(champData)
+    
+    
+    response = JsonResponse(qList, safe=False)
     
     return response

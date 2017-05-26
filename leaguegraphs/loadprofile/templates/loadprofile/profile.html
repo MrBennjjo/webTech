@@ -12,15 +12,13 @@
     {% load static %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{% static "scripts/chartPlotter.js" %}"></script>
+    <script>
+        var noItemImg = "{% static "styles/noPicture.png" %}"
+    </script>
     
-    
-    
-    
-    <!-- Load Bootstrap and our own css files -->
-    
+    <!-- Load our own css file -->
     <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}"/>
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet"/>
+    
     </head>
     <body> 
         <div class="bg bg-profile">
@@ -36,25 +34,55 @@
                 <option value="gold">gold average per min</option>
                 <option value="xp">xp average per min</option>
                 </select>
-                    <svg id = "svgChart" version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
-                        <style>
-                            .dataPoint {cursor: pointer; cursor: hand; }
-                            text {fill: #7f7f7f; font-family: 'Nunito', sans-serif; font-weight: bold}
-                            
-                        </style>
-                        <path d="M 65,100 H 75 M 65,200 H 75 M 65,300 H 75 M 65,400 H 75" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
-                        <path d="M 100,435 V 425 M 250,435 V 425 M 400,435 V 425 M 550,435 V 425 M 700,435 V 425" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
-                        <polyline points="75,75 75,425 725,425" stroke="#7f7f7f" fill="none" stroke-width="5"/>
-                        <polyline id="chartLine" points="100,250 250,250 400,250 550,250 700,250" stroke="white" fill="none" stroke-width="5"/>
-                        <g class="dataPoint" fill="red" >
-                            <circle cx="100" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
-                            <circle cx="250" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
-                            <circle cx="400" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
-                            <circle cx="550" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/> 
-                            <circle cx="700" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)"/>
-                        </g>
-                        <text id="hoverText" x="0" y="0"  font-size="30"></text>
-                    </svg>
+                
+                <svg id = "svgChart" version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+                    <style>
+                        .dataPoint {cursor: pointer; cursor: hand; }
+                        text {fill: #7f7f7f; font-family: 'Nunito', sans-serif; font-weight: bold}
+                        
+                    </style>
+                    <path d="M 65,100 H 75 M 65,200 H 75 M 65,300 H 75 M 65,400 H 75" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
+                    <path d="M 100,435 V 425 M 250,435 V 425 M 400,435 V 425 M 550,435 V 425 M 700,435 V 425" fill="none" stroke="#7f7f7f" stroke-width = "5"/>
+                    <polyline points="75,75 75,425 725,425" stroke="#7f7f7f" fill="none" stroke-width="5"/>
+                    <polyline id="chartLine" points="100,250 250,250 400,250 550,250 700,250" stroke="white" fill="none" stroke-width="5"/>
+                    <g class="dataPoint" fill="red">
+                        <circle cx="100" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                        <circle cx="250" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                        <circle cx="400" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                        <circle cx="550" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/> 
+                        <circle cx="700" cy="250" r="6" onmouseover="circleHover(this)" onmouseout="circleUnhover(this)" onmousedown="getMatch(this)"/>
+                    </g>
+                    <text id="hoverText" x="0" y="0"  font-size="30"></text>
+                </svg>
+                    
+                <div class="flex-container">
+                    <div class="matchImages">
+                        <img id="champImg" height="120" width="120" src="{% static "styles/noPicture.png" %}"/>
+                        <div>
+                            <img id="spell1Img" height="57" width="57" src="{% static "styles/noPicture.png" %}"/>
+                            <img id="spell2Img" height="57" width="57" src="{% static "styles/noPicture.png" %}"/>
+                        </div>
+                    </div>
+                    <div class="matchKDA">
+                        <p class="matchText" id="role">Role: </p>
+                        <p class="matchText" id="kda">KDA: </p>
+                        <p class="matchText" id="kdaRatio">KDA ratio: </p>
+                    </div>
+                    <div class="matchStats">
+                        <p class="matchText" id="lvl">lvl </p>
+                        <p class="matchText" id="endCS"> CS</p>
+                        <p class="matchText" id="endGold"> g</p>
+                    </div>
+                    <div class="matchItems">
+                        <img id="item0" src="{% static "styles/noPicture.png" %}"/>
+                        <img id="item1" src="{% static "styles/noPicture.png" %}"/>
+                        <img id="item2" src="{% static "styles/noPicture.png" %}"/>
+                        <img id="item6" src="{% static "styles/noPicture.png" %}"/>
+                        <img id="item3" src="{% static "styles/noPicture.png" %}"/>
+                        <img id="item4" src="{% static "styles/noPicture.png" %}"/>
+                        <img id="item5" src="{% static "styles/noPicture.png" %}"/>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

@@ -23,9 +23,9 @@
             <div class="form-box">
                 <form class="form" action="{% url 'loadprofile:form' %}" method="post">
 				{% csrf_token %}
-                    <label for="summonerInput" class = "form-label">Summoner Name</label>
+                    <label for="summonerInput" class = "form-label">Enter Your Summoner Name:</label>
                     <input type="text" name="summonerName" class="form-control" id="summonerInput" autofocus="true" />
-					{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+					{% if error_message %}<p class="error-message"><strong>{{ error_message }}</strong></p>{% endif %}
                     <button type="submit" class="btn btn-homepage">View Your Profile</button>
                 </form>
             </div>

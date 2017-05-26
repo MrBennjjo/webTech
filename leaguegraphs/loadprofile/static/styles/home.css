@@ -20,7 +20,7 @@ html {
 .btn {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin-top: 20px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.4;
@@ -99,6 +99,14 @@ html {
 .form-label {
     text-align: left;
     display: inline-block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #232323;
+}
+
+.error-message {
+    color: #cc0000;
 }
 
 .form-control {
@@ -149,7 +157,7 @@ html {
     font-size: 65px;
     font-family: 'Passion One', cursive, sans-serif;
     color: #232323;
-    text-shadow: 2px 2px 0px #828282;
+    text-shadow: 3px 3px 0px #e5e5e5;
     margin-left: 30px;
 }
 
@@ -203,9 +211,15 @@ html {
     color: #232323;
 }
 
+input[type='radio'] { 
+    transform: scale(2.5);
+    margin-bottom: 20px;
+}
+
 .radioText {
     font-weight: bold;
     font-size: 20px;
+    margin: 15px;
 }
 
 .background-fade {

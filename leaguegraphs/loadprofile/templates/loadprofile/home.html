@@ -7,30 +7,35 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Ben and Tom's League of Legends Wonderous Statisitics Emporium</title>
         
-        <!-- Load Bootstrap and our own css files -->
+        <!-- Load our own css files -->
         {% load static %}
         <link rel="stylesheet" type='text/css' href="{% static "styles/home.css" %}" />
         <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet"/>
         
+        <!-- scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{% static "scripts/homeBgAnimator.js" %}"></script>
+        <script>
+            var bgFolder = "{% static "styles/backgrounds/" %}"
+        </script>
     </head>
     <body> 
-        <div class="bg bg-homepage">
-            <div class = "home-banner">
-                <a href="{% url 'loadprofile:home' %}"><img height = "80px" src = "{% static "styles/logo.png" %}"/></a>
-                <div><h1 class = "banner-text">Interesting Graphs for League of Legends</h1></div>
-            </div>
-        
-            <div class="form-box">
-                <form class="form" action="{% url 'loadprofile:form' %}" method="post">
-				{% csrf_token %}
-                    <label for="summonerInput" class = "form-label">Enter Your Summoner Name:</label>
-                    <input type="text" name="summonerName" class="form-control" id="summonerInput" autofocus="true" />
-					{% if error_message %}<p class="error-message"><strong>{{ error_message }}</strong></p>{% endif %}
-                    <button type="submit" class="btn btn-homepage">View Your Profile</button>
-                </form>
+        <div class="bg bg-homepage" id="bgImage">
+            <div class="background-fade" id="backgroundFade">
+                <div class = "home-banner">
+                    <a href="{% url 'loadprofile:home' %}"><img height = "80px" src = "{% static "styles/logo.png" %}"/></a>
+                    <div><h1 class = "banner-text">Interesting Graphs for League of Legends</h1></div>
+                </div>
+                <div class="form-box">
+                    <form class="form" action="{% url 'loadprofile:form' %}" method="post">
+                    {% csrf_token %}
+                        <label for="summonerInput" class = "form-label">Enter Your Summoner Name:</label>
+                        <input type="text" name="summonerName" class="form-control" id="summonerInput" autofocus="true" />
+                        {% if error_message %}<p class="error-message"><strong>{{ error_message }}</strong></p>{% endif %}
+                        <button type="submit" class="btn btn-homepage">View Your Profile</button>
+                    </form>
+                </div>
             </div>
         </div>
     </body>
-    
-        
 </html>

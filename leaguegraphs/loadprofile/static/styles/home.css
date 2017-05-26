@@ -34,7 +34,6 @@ html {
 
 /* Homepage styles */
 .bg-homepage {
-    background-image: url("bg-homepage.jpg");
 	height: 100%;
 }
 
@@ -224,4 +223,5 @@ input[type='radio'] {
 
 .background-fade {
     background-color: RGBA(128, 128, 128, 0.2);
+    height: 100%;
 }
